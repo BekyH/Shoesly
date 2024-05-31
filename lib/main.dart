@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shoesly/config/route.dart';
+import 'package:shoesly/features/Discover/presentation/screens/discover_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key});
+   final AppRouter appRouter = AppRouter();
 
   // This widget is the root of your application.
   @override
@@ -17,10 +20,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:Center(
-       // backgroundColor: Colors.white,
-        child: Text("Shoesly",style: TextStyle(color: Colors.white),),
-      ),
+     onGenerateRoute: appRouter.onGeneratedRoute,
+     initialRoute: DiscoverPage.routeName,
+     debugShowCheckedModeBanner: false,
     );
   }
 }
