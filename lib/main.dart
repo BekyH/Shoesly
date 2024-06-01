@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoesly/config/route.dart';
 import 'package:shoesly/dp_injection/dp_injection.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/brandBloc/brand_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/discover_bloc.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/filterBloc/filter_bloc.dart';
 
 import 'package:shoesly/features/Discover/presentation/screens/discover_page.dart';
 import 'package:shoesly/firebase_options.dart';
@@ -27,7 +29,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-      BlocProvider(create: (_)=>sl<ShoeBloc>())
+      BlocProvider(create: (_)=>sl<ShoeBloc>()),
+       BlocProvider(create: (_)=>sl<BrandBloc>()),
+        BlocProvider(create: (_)=>sl<FilterShoesBloc>())
     ], 
     child: MaterialApp(
       title: 'Flutter Demo',
