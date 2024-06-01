@@ -14,3 +14,13 @@ var bodyTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w400,
   fontSize: 12
 );
+
+var bodySmallTextStyle = GoogleFonts.poppins(
+  fontWeight: FontWeight.w300,
+  fontSize: 12
+);
+
+var bodyMediumTextStyle = GoogleFonts.poppins(
+  fontWeight: FontWeight.w500,
+  fontSize: 14
+);

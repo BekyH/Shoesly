@@ -51,8 +51,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    height: screenHeight * 0.06,
-                    width: screenWidth * 0.02,
+                    height: screenHeight * 0.1,
+                    width: screenWidth * 0.05,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10)),
@@ -72,5 +72,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight( 120);
+  Size get preferredSize => Size.fromHeight( 80);
 }

@@ -11,6 +11,7 @@ class Shoe {
   final String size;
   final String gender;
   final String brand;
+  final String description;
 
   Shoe(
       {required this.imageUrl,
@@ -22,7 +23,8 @@ class Shoe {
       required this.color,
       required this.size,
       required this.gender,
-      required this.brand
+      required this.brand,
+      required this.description
       });
 
   factory Shoe.fromFirestore(DocumentSnapshot doc) {
@@ -37,8 +39,8 @@ class Shoe {
         gender: data['gender'],
         size: data['size'],
         color: data['color'],
-        brand: data['brand']
+        brand: data['brand'],
+        description: data['description']
         );
-
   }
 }

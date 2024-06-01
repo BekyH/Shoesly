@@ -12,6 +12,7 @@ import 'package:shoesly/features/Discover/presentation/bloc/brandBloc/brand_stat
 import 'package:shoesly/features/Discover/presentation/bloc/filterBloc/filter_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/filterBloc/filter_event.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/filterBloc/filter_state.dart';
+import 'package:shoesly/features/Discover/presentation/screens/shoes_details.dart';
 
 import 'package:shoesly/features/Discover/presentation/widgets/shoe_card.dart';
 
@@ -42,6 +43,7 @@ class _DiscoverPageState extends State<DiscoverPage>
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: CustomAppBar(
         title: 'Discover',
         actions: [
@@ -138,7 +140,15 @@ class _DiscoverPageState extends State<DiscoverPage>
                           ),
                           itemCount: state.shoes.length,
                           itemBuilder: (context, index) {
-                            return ShoeCard(shoe: state.shoes[index]);
+                            final shoes = state.shoes[index];
+                            return InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, ShoesDetails.routeName,
+                                    arguments: shoes);
+                              },
+                              child: ShoeCard(shoe:shoes),
+                            );
                           },
                         );
                       } else if (state is FilterShoesError) {
