@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoesly/config/route.dart';
 import 'package:shoesly/dp_injection/dp_injection.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/discover_bloc.dart';
 
 import 'package:shoesly/features/Discover/presentation/screens/discover_page.dart';
 import 'package:shoesly/firebase_options.dart';
@@ -23,7 +25,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+      BlocProvider(create: (_)=>sl<ShoeBloc>())
+    ], 
+    child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -32,6 +38,6 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: appRouter.onGeneratedRoute,
       initialRoute: DiscoverPage.routeName,
       debugShowCheckedModeBanner: false,
-    );
+    ));
   }
 }

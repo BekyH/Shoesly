@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shoesly/core/constants/app_text_styles.dart';
 import 'package:shoesly/core/constants/assets.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/widgets/custom_app_bar.dart';
 import 'package:shoesly/features/Discover/data/models/shoe.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/discover_bloc.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/discover_state.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/disocover_event.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/shoe_card.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/tab_bar.dart';
 
@@ -22,45 +26,62 @@ class _DiscoverPageState extends State<DiscoverPage>
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
 
-  final List<String> _tabs = ["All", "Nike", "Jordan", "Addidas", "Reebok","Vans"];
+  final List<String> _tabs = [
+    "All",
+    "Nike",
+    "Jordan",
+    "Addidas",
+    "Reebok",
+    "Vans"
+  ];
   @override
   void initState() {
+    context.read<ShoeBloc>().add(GetShoesEvent());
     _tabController = TabController(length: 5, vsync: this, initialIndex: 0);
     super.initState();
   }
 
   final List<Shoe> shoes = [
     Shoe(
-      imageUrl:
-          'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg', // Replace with actual URLs
-      brandLogoUrl:
-          'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg',
-      shoeName: 'Jordan 1 Retro High Tie Dye',
-      rating: 4.5,
-      reviews: 1045,
-      price: 235.00,
-    ),
+        imageUrl:
+            'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg', // Replace with actual URLs
+        brandLogoUrl:
+            'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg',
+        shoeName: 'Jordan 1 Retro High Tie Dye',
+        rating: 4.5,
+        reviews: 1045,
+        price: 235.00,
+        gender: 'male',
+        size: '41',
+        color: 'white',
+        brand: 'Jordan'),
     // Add more Shoe objects here
     Shoe(
-      imageUrl:
-          'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg', // Replace with actual URLs
-      brandLogoUrl:
-          'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg',
-      shoeName: 'Jordan 1 Retro High Tie Dye',
-      rating: 4.5,
-      reviews: 1045,
-      price: 235.00,
-    ),
+        imageUrl:
+            'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg', // Replace with actual URLs
+        brandLogoUrl:
+            'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg',
+        shoeName: 'Jordan 1 Retro High Tie Dye',
+        rating: 4.5,
+        reviews: 1045,
+        price: 235.00,
+        gender: 'male',
+        size: '41',
+        color: 'white',
+        brand: 'Jordan'),
     Shoe(
-      imageUrl:
-          'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg', // Replace with actual URLs
-      brandLogoUrl:
-          'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg',
-      shoeName: 'Jordan 1 Retro High Tie Dye',
-      rating: 4.5,
-      reviews: 1045,
-      price: 235.00,
-    ),
+        imageUrl:
+            'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg', // Replace with actual URLs
+        brandLogoUrl:
+            'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg',
+        shoeName: 'Jordan 1 Retro High Tie Dye',
+        rating: 4.5,
+        reviews: 1045,
+        price: 235.00,
+        gender: 'male',
+        size: '41',
+        color: 'white',
+        brand: 'Jordan'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -124,9 +145,8 @@ class _DiscoverPageState extends State<DiscoverPage>
                         _pageController.jumpToPage(index);
                       },
                       child: Container(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                       
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 10),
                         child: Center(
                           child: Text(_tabs[index],
                               style: titleTextStyle.copyWith(
@@ -148,19 +168,34 @@ class _DiscoverPageState extends State<DiscoverPage>
                 },
                 itemCount: _tabs.length,
                 itemBuilder: (context, index) {
-                  return GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // Number of columns
-                      childAspectRatio: 0.8, // Adjust as needed
-                      mainAxisSpacing: 5,
-                      crossAxisSpacing: 2,
-                    ),
-                    itemCount: shoes.length,
-                    itemBuilder: (context, index) {
-                      return ShoeCard(shoe: shoes[index]);
-                    },
-                  );
+                  return BlocBuilder<ShoeBloc, ShoeState>(
+                      builder: ((context, state) {
+                    if (state is ShoeLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is ShoeLoaded) {
+                      return GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, // Number of columns
+                          childAspectRatio: 0.8, // Adjust as needed
+                          mainAxisSpacing: 5,
+                          crossAxisSpacing: 2,
+                        ),
+                        itemCount: state.shoes.length,
+                        itemBuilder: (context, index) {
+                          return ShoeCard(shoe: state.shoes[index]);
+                        },
+                      );
+                    } else if (state is ShoeError) {
+                      return Center(
+                        child: Text(state.message),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  }));
                 },
               ),
             )

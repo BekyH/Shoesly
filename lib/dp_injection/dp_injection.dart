@@ -10,10 +10,10 @@ final sl = GetIt.instance;
 
 Future<void> serviceLocatorInit() async {
   // Bloc
-  sl.registerFactory(() => ShoeBloc(shoeUsecase:  sl()));
+  sl.registerFactory<ShoeBloc>(() => ShoeBloc(shoeUsecase:  sl()));
 
   // Use cases
-  sl.registerLazySingleton(() => ShoeUsecase(shoeRepository: sl()));
+  sl.registerLazySingleton<ShoeUsecase>(() => ShoeUsecase(shoeRepository: sl()));
 
   // Repository
   sl.registerLazySingleton<ShoeRepository>(() => ShoeRepoImpl(shoeRemoteDataSource: sl()));

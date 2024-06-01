@@ -5,27 +5,40 @@ class Shoe {
   final String brandLogoUrl;
   final String shoeName;
   final double rating;
-  final int reviews;
+  final double reviews;
   final double price;
+  final String color;
+  final String size;
+  final String gender;
+  final String brand;
 
-  Shoe({
-    required this.imageUrl,
-    required this.brandLogoUrl,
-    required this.shoeName,
-    required this.rating,
-    required this.reviews,
-    required this.price,
-  });
+  Shoe(
+      {required this.imageUrl,
+      required this.brandLogoUrl,
+      required this.shoeName,
+      required this.rating,
+      required this.reviews,
+      required this.price,
+      required this.color,
+      required this.size,
+      required this.gender,
+      required this.brand
+      });
 
   factory Shoe.fromFirestore(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     return Shoe(
-      imageUrl: data['imageUrl'],
-      brandLogoUrl: data['brandLogoUrl'],
-      shoeName: data['shoeName'],
-      rating: data['rating'].toDouble(),
-      reviews: data['reviews'],
-      price: data['price'].toDouble(),
-    );
+        imageUrl: data['imageUrl'],
+        brandLogoUrl: data['brandLogoUrl'],
+        shoeName: data['shoeName'],
+        rating: double.parse(data['rating']),
+        reviews: double.parse(data['reviews']),
+        price: double.parse(data['price']),
+        gender: data['gender'],
+        size: data['size'],
+        color: data['color'],
+        brand: data['brand']
+        );
+
   }
 }
