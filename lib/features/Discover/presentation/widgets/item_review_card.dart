@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:shimmer/shimmer.dart';
 import 'package:shoesly/core/constants/app_text_styles.dart';
+import 'package:shoesly/core/constants/assets.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/utils/date_parser.dart';
 
@@ -70,7 +71,7 @@ class ReviewsCard extends StatelessWidget {
                 RatingBarIndicator(
                   itemBuilder: (context, index) {
                     return SvgPicture.asset(
-                      "assets/icons/star_full_rounded.svg",
+                      Assets.starsvg,
                       colorFilter: const ColorFilter.mode(
                         AppColors.orangeColor,
                         BlendMode.srcIn,

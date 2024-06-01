@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:shoesly/core/constants/app_text_styles.dart';
 import 'package:shoesly/features/Discover/data/models/shoe.dart';
 
@@ -32,19 +34,46 @@ class ShoeCard extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Padding(padding: EdgeInsets.all(10),
-                  child: Image.network(
-                    shoe.brandLogoUrl,
-                    height: screenWidth * 0.05,
-                  ),
+                  child: CachedNetworkImage(
+                      imageUrl:
+                         shoe.brandLogoUrl,
+                     
+                      height: screenHeight * 0.03,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          color: Colors.white,
+                          width: screenWidth*0.1,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => const Icon(
+                        Icons.person,
+                      ),
+                    ),
+                  
                   )
                 ),
                 SizedBox(height: screenWidth * 0.02),
                 Center(
-                  child: Image.network(
-                    shoe.imageUrl,
-                    height: screenHeight * 0.1,
-                    fit: BoxFit.cover,
-                  ),
+                  child: CachedNetworkImage(
+                      imageUrl:
+                         shoe.imageUrl,
+                     
+                      height: screenHeight * 0.1,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          color: Colors.white,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => const Icon(
+                        Icons.person,
+                      ),
+                    ),
                 ),
               ],
             ),
