@@ -66,10 +66,13 @@ class ReviewsCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(review.userName,
+                    SizedBox(
+                      width: screenWidth*0.5,
+                      child: Text(review.userName,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: bodyTextStyle),
+                    ),
                     RatingBarIndicator(
                       itemBuilder: (context, index) {
                         return SvgPicture.asset(
@@ -85,7 +88,10 @@ class ReviewsCard extends StatelessWidget {
                       itemCount: 5,
                       rating: 5,
                     ),
-                    Text(review.comment, style: bodyMediumTextStyle),
+                    SizedBox(
+                      width: screenWidth*0.55,
+                      child: Text(review.comment, style: bodyMediumTextStyle,maxLines: 2,overflow: TextOverflow.ellipsis,),
+                    ),
                   ],
                 )
               ],

@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoesly/core/constants/app_text_styles.dart';
 
 import 'package:shoesly/core/theme/colors.dart';
 
@@ -10,11 +10,12 @@ import 'package:shoesly/features/Discover/presentation/bloc/reviewsBloc/reviews_
 import 'package:shoesly/features/Discover/presentation/bloc/reviewsBloc/reviews_state.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/item_review_card.dart';
 
-
 class ReviewsPage extends StatefulWidget {
+  final String brand;
   static const routeName = "/reviews_page";
 
-  const ReviewsPage({Key? key}) : super(key: key);
+
+  const ReviewsPage({Key? key,required this.brand}) : super(key: key);
 
   @override
   _ReviewsPageState createState() => _ReviewsPageState();
@@ -29,7 +30,14 @@ class _ReviewsPageState extends State<ReviewsPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    final tabs = ["All", "5 stars", "4 stars", "3 stars", "2 stars", "1 star"];
+    final Map<String, String> tabs = {
+      "All": "all",
+      "5 stars": "5",
+      "4 stars": "4",
+      "3 stars": "3",
+      "2 stars": "2",
+      "1 star": "1"
+    };
 
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
@@ -51,28 +59,25 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 scrollDirection: Axis.horizontal,
                 itemCount: tabs.length,
                 itemBuilder: (context, index) {
+                  String displayText = tabs.keys.elementAt(index);
+                  String dbValue = tabs.values.elementAt(index);
                   return GestureDetector(
                     onTap: () {
                       setState(() {
                         _selectedIndex = index;
-                        print(tabs[index]);
                       });
-                      context
-                          .read<ReviewsBloc>()
-                          .add(GetReviewsEvent(tabs[index]));
+                      context.read<ReviewsBloc>().add(GetReviewsEvent(widget.brand,dbValue));
                       _pageController.jumpToPage(index);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 10),
                       child: Center(
-                        child: Text(tabs[index],
-                            style: TextStyle(
-                                fontSize: 16, // Adjust as needed
-                                fontWeight: FontWeight.bold, // Adjust as needed
-                                color: _selectedIndex == index
-                                    ? Colors.black
-                                    : AppColors.tabColor)),
+                        child: Text(displayText,
+                            style: titleTextStyle.copyWith(
+                                        color: _selectedIndex == index
+                                            ? Colors.black
+                                            : AppColors.tabColor)),
                       ),
                     ),
                   );
@@ -91,12 +96,12 @@ class _ReviewsPageState extends State<ReviewsPage> {
                   return BlocBuilder<ReviewsBloc, ReviewsState>(
                     builder: (context, state) {
                       if (state is ReviewsLoading) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       } else if (state is ReviewsLoaded) {
                         if (state.reviews.isEmpty) {
-                          return Center(
+                          return const Center(
                             child: Text("No reviews with this rating"),
                           );
                         }
@@ -125,4 +130,3 @@ class _ReviewsPageState extends State<ReviewsPage> {
     );
   }
 }
-

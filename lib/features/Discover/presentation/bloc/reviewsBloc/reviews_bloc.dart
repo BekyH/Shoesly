@@ -12,8 +12,10 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
       emit(ReviewsLoading());
       try {
         List<Review> reviews = [];
+        // print(event.brand);
+        // print(event.rating);
+        reviews = await reviewsUsecase.getReviews(event.brand, event.rating);
 
-        final filteredShoes = await reviewsUsecase.getReviews(event.brand);
         emit(ReviewsLoaded(reviews));
       } catch (e) {
         emit(ReviewsError(e.toString()));

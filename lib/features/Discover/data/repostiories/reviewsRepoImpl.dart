@@ -6,7 +6,9 @@ class ReviewsRepoImpl implements ReviewsRepository {
   final ReviewsRemoteDataSource remoteDataSource;
   ReviewsRepoImpl({required this.remoteDataSource});
   @override
-  Future<List<Review>> getReviews(String brand) async {
-    return await remoteDataSource.getReviews(brand);
+  Future<List<Review>> getReviews(String brand, String rating) async {
+    return await remoteDataSource.getReviews(brand,rating);
   }
+
+ 
 }
