@@ -14,10 +14,13 @@ import 'package:shoesly/core/constants/app_text_styles.dart';
 import 'package:shoesly/core/constants/assets.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/utils/date_parser.dart';
+import 'package:shoesly/features/Discover/data/models/review.dart';
 
 class ReviewsCard extends StatelessWidget {
+  final Review review;
   ReviewsCard({
     super.key,
+    required this.review
   });
 
   @override
@@ -27,14 +30,11 @@ class ReviewsCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(
-            vertical: screenHeight * 0.02, horizontal: screenWidth * 0.04),
-        child: Row(
-        
-          children: [
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+              vertical: screenHeight * 0.02, horizontal: screenWidth * 0.04),
+          child: Row(children: [
             Row(
-              
               children: [
                 SizedBox(
                   width: screenWidth * 0.16,
@@ -43,7 +43,7 @@ class ReviewsCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                     child: CachedNetworkImage(
                       imageUrl:
-                          "https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg",
+                         review.userImageUrl,
                       width: screenWidth * 0.2,
                       height: screenHeight * 0.1,
                       fit: BoxFit.cover,
@@ -60,42 +60,40 @@ class ReviewsCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: screenWidth*0.04,),
+                SizedBox(
+                  width: screenWidth * 0.04,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("John Doe",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: bodyTextStyle),
-                RatingBarIndicator(
-                  itemBuilder: (context, index) {
-                    return SvgPicture.asset(
-                      Assets.starsvg,
-                      colorFilter: const ColorFilter.mode(
-                        AppColors.orangeColor,
-                        BlendMode.srcIn,
-                      ),
-                    );
-                  },
-                  itemPadding: const EdgeInsets.symmetric(horizontal: 1),
-                  itemSize: 12,
-                  itemCount: 5,
-                  rating: 5,
-                ),
-                Text('I love this shoes', style: bodyMediumTextStyle),
+                    Text(review.userName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: bodyTextStyle),
+                    RatingBarIndicator(
+                      itemBuilder: (context, index) {
+                        return SvgPicture.asset(
+                          Assets.starsvg,
+                          colorFilter: const ColorFilter.mode(
+                            AppColors.orangeColor,
+                            BlendMode.srcIn,
+                          ),
+                        );
+                      },
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 1),
+                      itemSize: 12,
+                      itemCount: 5,
+                      rating: 5,
+                    ),
+                    Text(review.comment, style: bodyMediumTextStyle),
                   ],
                 )
               ],
             ),
             Spacer(),
-             Text(formatDateTime(DateTime.now()),
-                                      style: bodySmallTextStyle.copyWith(
-                                          color: AppColors.tabColor)),
-           
-          ]
-        )      
-      ),
+            Text(formatDateTime(DateTime.now()),
+                style: bodySmallTextStyle.copyWith(color: AppColors.tabColor)),
+          ])),
     );
   }
 }
