@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shoesly/features/Discover/data/models/shoe.dart';
 import 'package:shoesly/features/Discover/presentation/screens/discover_page.dart';
+import 'package:shoesly/features/Discover/presentation/screens/filter_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/shoes_details.dart';
 
 class AppRouter {
@@ -16,7 +17,11 @@ class AppRouter {
       if(args is Shoe){
          return MaterialPageRoute(
             settings: routeSettings, builder: (_) => ShoesDetails(shoe:args));
+      
       }
+       case FilterPage.routeName:
+      return MaterialPageRoute(
+            settings: routeSettings, builder: (_) => const FilterPage());
        
     }
   }

@@ -26,6 +26,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return AppBar(
+      backgroundColor: Colors.white,
       elevation: 0,
       scrolledUnderElevation: 0,
       title: Padding(
