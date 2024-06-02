@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shoesly/core/constants/app_text_styles.dart';
 
-class CustomButton extends StatelessWidget {
-  
+class CustomIconButton extends StatelessWidget {
+  final String icon;
   final String title;
   final Color color;
+  final Color textColor;
   final double width;
   final VoidCallback onPressed;
-  final Color textColor;
 
-  CustomButton({
-    Key? key,
-    
-    required this.title,
-    this.color = Colors.blue,
-    this.width = 200.0,
-    required this.onPressed,
-    required this.textColor
-  }) : super(key: key);
+  const CustomIconButton(
+      {Key? key,
+      required this.icon,
+      required this.textColor,
+      required this.color,
+      required this.title,
+       this.width=200,
+      required this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +31,15 @@ class CustomButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0),
           ),
-          padding: EdgeInsets.symmetric(vertical: 15.0),
+          padding: const EdgeInsets.symmetric(vertical: 15.0),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-           
-              SizedBox(width: 8.0),
-            
+            SvgPicture.asset(
+              icon
+            ),
+            const SizedBox(width: 8.0),
             Text(
               title,
               style: bodyMediumTextStyle.copyWith(color: textColor),

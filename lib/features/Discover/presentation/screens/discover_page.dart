@@ -6,6 +6,7 @@ import 'package:shoesly/core/constants/assets.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/widgets/custom_app_bar.dart';
 import 'package:shoesly/core/widgets/custom_button.dart';
+import 'package:shoesly/core/widgets/custom_icon_button.dart';
 
 import 'package:shoesly/features/Discover/presentation/bloc/brandBloc/brand_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/brandBloc/brand_event.dart';
@@ -170,10 +171,10 @@ class _DiscoverPageState extends State<DiscoverPage>
         ),
         floatingActionButton: Align(
           alignment: Alignment.bottomCenter,
-          child: CustomButton(
+          child: CustomIconButton(
               title: 'FILTER',
               color: Colors.black,
-              icon: Icons.filter,
+              icon:Assets.filtersvg,
               onPressed: () {
                 Navigator.pushNamed(context, FilterPage.routeName);
               },

@@ -83,7 +83,7 @@ class ReviewsCard extends StatelessWidget {
                   itemCount: 5,
                   rating: 5,
                 ),
-                Text('I love this food', style: bodyMediumTextStyle),
+                Text('I love this shoes', style: bodyMediumTextStyle),
                   ],
                 )
               ],

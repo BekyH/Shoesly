@@ -44,127 +44,132 @@ class _ShoesDetailsState extends State<ShoesDetails> {
           Padding(
             padding: EdgeInsets.only(right: 20, top: 10),
             child: InkWell(
+              onTap: () {
+                // Handle cart icon tap if necessary
+              },
               child: SvgPicture.asset(Assets.cartsvg),
             ),
           )
         ],
       ),
-      body: Padding(
+      body:Padding(
         padding: EdgeInsets.symmetric(
             horizontal: screenWidth * 0.02, vertical: screenHeight * 0.001),
         child: SingleChildScrollView(
-          child:
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomShoeWidget(
+                shoeImageUrl: widget.shoe.imageUrl,
+                colorOptions: [Colors.black, Colors.white, Colors.blue],
+                selectedColorIndex: _selectedColorIndex,
+                onColorSelected: _handleColorSelection,
+              ),
+              SizedBox(height: 16),
+              Text(
+                widget.shoe.shoeName,
+                style: bodyMediumTextStyle
+              ),
+              SizedBox(height: 8),
+              Row(
                 children: [
-                  CustomShoeWidget(
-                    shoeImageUrl:
-                        widget.shoe.imageUrl, // Replace with your image URL
-                    colorOptions: [Colors.black, Colors.white, Colors.blue],
-                    selectedColorIndex: _selectedColorIndex,
-                    onColorSelected: _handleColorSelection,
-                  ),
-                  SizedBox(height: 16),
+                  Icon(Icons.star, color: Colors.yellow),
+                  Icon(Icons.star, color: Colors.yellow),
+                  Icon(Icons.star, color: Colors.yellow),
+                  Icon(Icons.star, color: Colors.yellow),
+                  Icon(Icons.star_half, color: Colors.yellow),
+                  SizedBox(width: 8),
                   Text(
-                    widget.shoe.shoeName,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    "${widget.shoe.rating} (${widget.shoe.reviews} Reviews)",
+                    style: bodySmallTextStyle.copyWith(color: AppColors.tabColor),
                   ),
-                  SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.yellow),
-                      Icon(Icons.star, color: Colors.yellow),
-                      Icon(Icons.star, color: Colors.yellow),
-                      Icon(Icons.star, color: Colors.yellow),
-                      Icon(Icons.star_half, color: Colors.yellow),
-                      SizedBox(width: 8),
-                      Text(
-                        "${widget.shoe.rating} ( ${widget.shoe.reviews} Reviews)",
-                        style: bodySmallTextStyle.copyWith(
-                            color: AppColors.tabColor),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
-                  Text("Size", style: bodyMediumTextStyle),
-                  SizedBox(height: 8),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizeContainer(title: "38"),
-                      SizeContainer(title: "39"),
-                      SizeContainer(title: "40"),
-                      SizeContainer(title: "41"),
-                      SizeContainer(title: "42")
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Text("Description", style: bodyMediumTextStyle),
-                  const SizedBox(height: 8),
-                  Text(
-                    widget.shoe.description,
-                    style: bodyTextStyle.copyWith(fontSize: 14),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Reviews",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  ReviewsCard(),
-                  ReviewsCard(),
-                //  Expanded(child:  ListView.separated(
-                //     physics: NeverScrollableScrollPhysics(),
-                //     shrinkWrap: true,
-                //       itemBuilder: (context, index) {
-                //         return ReviewsCard();
-                //       },
-                //       separatorBuilder: (context, index) {
-                //         return SizedBox(
-                //           height: 8,
-                //         );
-                //       },
-                //       itemCount: 20)),
+                ],
+              ),
+              SizedBox(height: 16),
+              Text("Size", style: bodyMediumTextStyle),
+              SizedBox(height: 8),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizeContainer(title: "38"),
+                  SizeContainer(title: "39"),
+                  SizeContainer(title: "40"),
+                  SizeContainer(title: "41"),
+                  SizeContainer(title: "42")
+                ],
+              ),
+              const SizedBox(height: 16),
+              Text("Description", style: bodyMediumTextStyle),
+              const SizedBox(height: 8),
+              Text(
+                widget.shoe.description,
+                style: bodyTextStyle.copyWith(fontSize: 14),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                "Reviews",
+                style: bodyMediumTextStyle
+              ),
+              const SizedBox(height: 8),
+              ReviewsCard(),
+              ReviewsCard(),
+              ReviewsCard(),
+              const SizedBox(height: 10,),
+             Center(child:  CustomButton(
+                title: 'SEE ALL REVIEW',
+                 onPressed: (){}, 
+                 color: AppColors.whiteColor,
+                 textColor: AppColors.blackColor
+                 ),),
              
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      "Price",
-                      style: bodySmallTextStyle.copyWith(
-                          color: AppColors.tabColor),
-                    ),
-                    SizedBox(
-                      height: screenHeight * 0.01,
-                    ),
-                    Text("\$${widget.shoe.price}", style: bodyMediumTextStyle),
-                  ],
-                ),
-                CustomButton(
-                    title: 'ADD TO CART',
-                    color: AppColors.blackColor,
-                    textColor: AppColors.whiteColor,
-                    onPressed: () {})
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            )
-                ]
+              const SizedBox(
+                height: 10,
+              )
+            ],
+          ),
         ),
       ),
-    ));
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 5,
+                spreadRadius: 1,
+                offset: Offset(0, -1),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Price",
+                    style: bodySmallTextStyle.copyWith(color: AppColors.tabColor),
+                  ),
+                  SizedBox(height: screenHeight * 0.01),
+                  Text("\$${widget.shoe.price}", style: bodyMediumTextStyle),
+                ],
+              ),
+              CustomButton(
+                title: 'ADD TO CART',
+                color: AppColors.blackColor,
+                textColor: AppColors.whiteColor,
+                onPressed: () {
+                  
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
-
-
-
