@@ -10,4 +10,5 @@ class Assets {
   static const String closesvg = "${_iconPath}close.svg";
   static const String minussvg = "${_iconPath}minus.svg";
   static const String plussvg = "${_iconPath}plus.svg";
+  
 }

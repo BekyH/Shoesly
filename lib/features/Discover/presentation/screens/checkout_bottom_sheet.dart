@@ -5,6 +5,7 @@ import 'package:shoesly/core/constants/app_text_styles.dart';
 import 'package:shoesly/core/constants/assets.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/widgets/custom_button.dart';
+import 'package:shoesly/features/Discover/presentation/screens/add_to_cart_bottom_sheet.dart';
 
 class CheckoutBottomSheet extends StatefulWidget {
   const CheckoutBottomSheet({Key? key}) : super(key: key);
@@ -44,7 +45,8 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
         padding: EdgeInsets.symmetric(
             horizontal: screenWidth * 0.04, vertical: screenHeight * 0.03),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25), color: AppColors.whiteColor),
+            borderRadius: BorderRadius.circular(25),
+            color: AppColors.whiteColor),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +62,6 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
                 IconButton(
                   onPressed: () {
                     Navigator.of(context).pop();
-                    
                   },
                   icon: SvgPicture.asset(Assets.closesvg),
                 )
@@ -74,40 +75,48 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
               style: bodyMediumTextStyle,
             ),
             const SizedBox(height: 20),
-           TextField(
-        controller: _quantityController,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-          border: UnderlineInputBorder(),  // Bottom border only
-          suffixIcon: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                icon:SvgPicture.asset(Assets.minussvg),
-                onPressed: _decrementQuantity,
+            TextField(
+              controller: _quantityController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                border: UnderlineInputBorder(), // Bottom border only
+                suffixIcon: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: SvgPicture.asset(Assets.minussvg),
+                      onPressed: _decrementQuantity,
+                    ),
+                    IconButton(
+                      icon: SvgPicture.asset(Assets.plussvg),
+                      onPressed: _incrementQuantity,
+                    ),
+                  ],
+                ),
               ),
-              IconButton(
-                icon:SvgPicture.asset(Assets.plussvg),
-                onPressed: _incrementQuantity,
-              ),
-            ],
-          ),
-        ),
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly, // Only allow positive integers
-        ],
-      ),
+              inputFormatters: [
+                FilteringTextInputFormatter
+                    .digitsOnly, // Only allow positive integers
+              ],
+            ),
             const SizedBox(height: 20),
             Align(
               alignment: Alignment.center,
               child: CustomButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              title: 'ADD TO CART',
-              textColor: AppColors.whiteColor,
-              color: AppColors.blackColor,
-            ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  showModalBottomSheet(
+                      context: context,
+                      useSafeArea: true,
+                      isScrollControlled: true,
+                      builder: (context) {
+                        return const AddToCartBottomSheet();
+                      });
+                },
+                title: 'ADD TO CART',
+                textColor: AppColors.whiteColor,
+                color: AppColors.blackColor,
+              ),
             )
           ],
         ),
