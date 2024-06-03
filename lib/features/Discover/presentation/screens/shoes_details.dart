@@ -11,6 +11,7 @@ import 'package:shoesly/features/Discover/presentation/bloc/reviewsBloc/reviews_
 import 'package:shoesly/features/Discover/presentation/bloc/reviewsBloc/reviews_event.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/reviewsBloc/reviews_state.dart';
 import 'package:shoesly/features/Discover/presentation/screens/Reviews_page.dart';
+import 'package:shoesly/features/Discover/presentation/screens/checkout_bottom_sheet.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/custom_image_shoe.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/item_review_card.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/size_container.dart';
@@ -209,7 +210,16 @@ class _ShoesDetailsState extends State<ShoesDetails> {
                 title: 'ADD TO CART',
                 color: AppColors.blackColor,
                 textColor: AppColors.whiteColor,
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      useSafeArea: true,
+                      backgroundColor: Colors.white,
+                      builder: (context) {
+                        return CheckoutBottomSheet();
+                      });
+                },
               ),
             ],
           ),
