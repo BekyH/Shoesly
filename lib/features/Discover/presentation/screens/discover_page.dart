@@ -14,6 +14,7 @@ import 'package:shoesly/features/Discover/presentation/bloc/brandBloc/brand_stat
 import 'package:shoesly/features/Discover/presentation/bloc/filterBloc/filter_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/filterBloc/filter_event.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/filterBloc/filter_state.dart';
+import 'package:shoesly/features/Discover/presentation/screens/cart_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/filter_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/shoes_details.dart';
 
@@ -54,6 +55,9 @@ class _DiscoverPageState extends State<DiscoverPage>
               padding: EdgeInsets.only(right: 20, top: 10),
               child: InkWell(
                 child: SvgPicture.asset(Assets.cartsvg),
+                onTap: () {
+                   Navigator.pushNamed(context, CartPage.routename);
+                },
               ),
             )
           ],

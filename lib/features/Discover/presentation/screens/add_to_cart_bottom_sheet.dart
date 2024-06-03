@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/widgets/custom_button.dart';
+import 'package:shoesly/features/Discover/presentation/screens/cart_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/discover_page.dart';
 
 class AddToCartBottomSheet extends StatelessWidget {
@@ -51,7 +52,7 @@ class AddToCartBottomSheet extends StatelessWidget {
                 CustomButton(
                   width: screenWidth * 0.4,
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, CartPage.routename);
                   },
                   title: 'TO CART',
                   color: AppColors.blackColor,

@@ -11,6 +11,7 @@ import 'package:shoesly/features/Discover/presentation/bloc/reviewsBloc/reviews_
 import 'package:shoesly/features/Discover/presentation/bloc/reviewsBloc/reviews_event.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/reviewsBloc/reviews_state.dart';
 import 'package:shoesly/features/Discover/presentation/screens/Reviews_page.dart';
+import 'package:shoesly/features/Discover/presentation/screens/cart_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/checkout_bottom_sheet.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/custom_image_shoe.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/item_review_card.dart';
@@ -57,7 +58,7 @@ class _ShoesDetailsState extends State<ShoesDetails> {
             padding: EdgeInsets.only(right: 20, top: 10),
             child: InkWell(
               onTap: () {
-                // Handle cart icon tap if necessary
+                Navigator.pushNamed(context, CartPage.routename);
               },
               child: SvgPicture.asset(Assets.cartsvg),
             ),

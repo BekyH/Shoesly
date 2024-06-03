@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:shoesly/features/Discover/data/models/review.dart';
 import 'package:shoesly/features/Discover/data/models/shoe.dart';
 import 'package:shoesly/features/Discover/presentation/screens/Reviews_page.dart';
+import 'package:shoesly/features/Discover/presentation/screens/cart_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/discover_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/filter_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/shoes_details.dart';
@@ -30,7 +31,11 @@ class AppRouter {
               builder: (_) => ReviewsPage(
                     brand: args,
                   ));
+
         }
+      case CartPage.routename:
+          return MaterialPageRoute(
+            settings: routeSettings, builder: (_) => const CartPage());
     }
   }
 }
