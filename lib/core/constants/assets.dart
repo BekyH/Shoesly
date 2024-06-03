@@ -7,4 +7,7 @@ class Assets {
   static const String backsvg = "${_iconPath}arrow_back.svg";
   static const String filtersvg = "${_iconPath}filter.svg";
   static const String starsvg = "${_iconPath}star_full_rounded.svg";
+  static const String closesvg = "${_iconPath}close.svg";
+  static const String minussvg = "${_iconPath}minus.svg";
+  static const String plussvg = "${_iconPath}plus.svg";
 }
