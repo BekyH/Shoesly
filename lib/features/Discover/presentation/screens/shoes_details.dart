@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shoesly/core/constants/app_text_styles.dart';
@@ -40,6 +42,8 @@ class _ShoesDetailsState extends State<ShoesDetails> {
     context.read<ReviewsBloc>().add(GetReviewsEvent(widget.shoe.brand, 'all'));
     super.initState();
   }
+
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -99,15 +103,33 @@ class _ShoesDetailsState extends State<ShoesDetails> {
               SizedBox(height: 16),
               Text("Size", style: bodyMediumTextStyle),
               SizedBox(height: 8),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizeContainer(title: "38"),
-                  SizeContainer(title: "39"),
-                  SizeContainer(title: "40"),
-                  SizeContainer(title: "41"),
-                  SizeContainer(title: "42")
-                ],
+              SizedBox(
+                height: screenHeight * 0.04,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: widget.shoe.size.length,
+                  itemBuilder: ((context, index) {
+                    final size = widget.shoe.size[index];
+                    final isSelected = index == selectedIndex;
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = index;
+                        });
+                      },
+                      child: SizeContainer(
+                        title: size,
+                        selected: isSelected,
+                      ),
+                    );
+                  }),
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      width: 10,
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: 16),
               Text("Description", style: bodyMediumTextStyle),
@@ -218,7 +240,10 @@ class _ShoesDetailsState extends State<ShoesDetails> {
                       useSafeArea: true,
                       backgroundColor: Colors.white,
                       builder: (context) {
-                        return CheckoutBottomSheet(shoe: widget.shoe,);
+                        return CheckoutBottomSheet(
+                          shoe: widget.shoe,
+                          size: widget.shoe.size[selectedIndex],
+                        );
                       });
                 },
               ),

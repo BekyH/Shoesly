@@ -3,7 +3,8 @@ import 'package:shoesly/core/theme/colors.dart';
 
 class SizeContainer extends StatelessWidget {
   final String title;
-  const SizeContainer({Key? key,required this.title}) : super(key: key);
+  final bool selected;
+  const SizeContainer({Key? key, required this.title, required this.selected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +16,8 @@ class SizeContainer extends StatelessWidget {
         width: screenWidth * 0.09,
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white,
+            color: selected? AppColors.blackColor:AppColors.whiteColor,
             border: Border.all(width: 1.5, color: AppColors.tabColor)),
-        child: Text(title));
+        child: Text(title,style: TextStyle(color: selected?AppColors.whiteColor:AppColors.blackColor),));
   }
 }

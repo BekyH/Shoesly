@@ -68,7 +68,7 @@ class _CartPageState extends State<CartPage> {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Carf',
+        title: 'Cart',
         isBack: true,
       ),
       backgroundColor: AppColors.whiteColor,

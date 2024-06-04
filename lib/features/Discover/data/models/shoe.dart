@@ -8,7 +8,7 @@ class Shoe {
   final double reviews;
   final double price;
   final String color;
-  final String size;
+  final List<String> size;
   final String gender;
   final String brand;
   final String description;
@@ -37,7 +37,7 @@ class Shoe {
         reviews: double.parse(data['reviews']),
         price: double.parse(data['price']),
         gender: data['gender'],
-        size: data['size'],
+        size: List<String>.from(data["size"].map((x) => x)),
         color: data['color'],
         brand: data['brand'],
         description: data['description']

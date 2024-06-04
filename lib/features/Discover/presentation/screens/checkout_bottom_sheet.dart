@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shoesly/core/constants/app_text_styles.dart';
 import 'package:shoesly/core/constants/assets.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/widgets/custom_button.dart';
+import 'package:shoesly/features/Discover/data/models/cartItem.dart';
 import 'package:shoesly/features/Discover/data/models/shoe.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/addCartBloc/add_cart_bloc.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/addCartBloc/add_cart_event.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/addCartBloc/add_cart_state.dart';
 import 'package:shoesly/features/Discover/presentation/screens/add_to_cart_bottom_sheet.dart';
+import 'package:shoesly/features/Discover/presentation/widgets/loading_button.dart';
 
 class CheckoutBottomSheet extends StatefulWidget {
   final Shoe shoe;
-  const CheckoutBottomSheet({Key? key, required this.shoe}) : super(key: key);
+  final String size;
+  const CheckoutBottomSheet({Key? key, required this.shoe, required this.size}) : super(key: key);
 
   @override
   _CheckoutBottomSheetState createState() => _CheckoutBottomSheetState();
@@ -24,6 +31,7 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
     int currentQuantity = int.tryParse(_quantityController.text) ?? 1;
     setState(() {
       _quantityController.text = (currentQuantity + 1).toString();
+      total = (currentQuantity + 1) * widget.shoe.price;
     });
   }
 
@@ -32,8 +40,28 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
     if (currentQuantity > 1) {
       setState(() {
         _quantityController.text = (currentQuantity - 1).toString();
+        total = (currentQuantity - 1) * widget.shoe.price;
       });
     }
+  }
+
+  CartItem _createCartItem(double total) {
+    return CartItem(
+      shoes: widget.shoe.shoeName,
+      quantity: int.parse(_quantityController.text),
+      price: total.toString(),
+      brand: widget.shoe.brand,
+      color: widget.shoe.color,
+      size: widget.size,
+      imageUrl: widget.shoe.imageUrl,
+    );
+  }
+
+  late double total;
+  @override
+  void initState() {
+    total = widget.shoe.price;
+    super.initState();
   }
 
   @override
@@ -115,23 +143,46 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
                     SizedBox(
                       height: 5,
                     ),
-                    Text(widget.shoe.price.toString())
+                    Text(total.toString())
                   ],
                 ),
-                CustomButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    showModalBottomSheet(
-                        context: context,
-                        useSafeArea: true,
-                        isScrollControlled: true,
-                        builder: (context) {
-                          return const AddToCartBottomSheet();
-                        });
-                  },
-                  title: 'ADD TO CART',
-                  textColor: AppColors.whiteColor,
-                  color: AppColors.blackColor,
+                BlocListener<AddCartBloc, AddcartState>(
+                  listener: ((context, state) {
+                    if (state is AddcartSuccess) {
+                      Navigator.of(context).pop();
+                      showModalBottomSheet(
+                          context: context,
+                          useSafeArea: true,
+                          isScrollControlled: true,
+                          builder: (context) {
+                            return AddToCartBottomSheet(
+                              quantity: _quantityController.text,
+                            );
+                          });
+                    } else if (state is AddCartFailure) {}
+                  }),
+                  child: BlocBuilder<AddCartBloc, AddcartState>(
+                    builder: (context, state) {
+                      if (state is AddcartLoading) {
+                        return LoadingButton(
+                          title: 'Adding ',
+                          color: AppColors.blackColor,
+                          onClick: () {},
+                          loadingState: true,
+                        );
+                      } else {
+                        return CustomButton(
+                          onPressed: () {
+                            context.read<AddCartBloc>().add(AddCartItemEvent(
+                                cartItem: _createCartItem(total)));
+                          },
+                          title: 'ADD TO CART',
+                          textColor: AppColors.whiteColor,
+                          color: AppColors.blackColor,
+                        );
+                      }
+                    },
+                  ),
                 ),
               ],
             )

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/widgets/custom_button.dart';
-import 'package:shoesly/features/Discover/data/models/shoe.dart';
 import 'package:shoesly/features/Discover/presentation/screens/cart_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/discover_page.dart';
 
 class AddToCartBottomSheet extends StatelessWidget {
- 
-  const AddToCartBottomSheet({Key? key,}) : super(key: key);
+  final String quantity;
+   AddToCartBottomSheet({
+    Key? key,
+    required this.quantity
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class AddToCartBottomSheet extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
-            Text('1 Item Total', style: TextStyle(fontSize: 16)),
+            Text('$quantity Item Total', style: TextStyle(fontSize: 16)),
             SizedBox(height: 16),
             Row(
               children: [
