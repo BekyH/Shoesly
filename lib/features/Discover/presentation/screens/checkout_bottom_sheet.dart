@@ -5,10 +5,12 @@ import 'package:shoesly/core/constants/app_text_styles.dart';
 import 'package:shoesly/core/constants/assets.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/widgets/custom_button.dart';
+import 'package:shoesly/features/Discover/data/models/shoe.dart';
 import 'package:shoesly/features/Discover/presentation/screens/add_to_cart_bottom_sheet.dart';
 
 class CheckoutBottomSheet extends StatefulWidget {
-  const CheckoutBottomSheet({Key? key}) : super(key: key);
+  final Shoe shoe;
+  const CheckoutBottomSheet({Key? key, required this.shoe}) : super(key: key);
 
   @override
   _CheckoutBottomSheetState createState() => _CheckoutBottomSheetState();
@@ -100,23 +102,38 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
               ],
             ),
             const SizedBox(height: 20),
-            Align(
-              alignment: Alignment.center,
-              child: CustomButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  showModalBottomSheet(
-                      context: context,
-                      useSafeArea: true,
-                      isScrollControlled: true,
-                      builder: (context) {
-                        return const AddToCartBottomSheet();
-                      });
-                },
-                title: 'ADD TO CART',
-                textColor: AppColors.whiteColor,
-                color: AppColors.blackColor,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      'Price',
+                      style: bodySmallTextStyle.copyWith(
+                          color: AppColors.tabColor),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(widget.shoe.price.toString())
+                  ],
+                ),
+                CustomButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    showModalBottomSheet(
+                        context: context,
+                        useSafeArea: true,
+                        isScrollControlled: true,
+                        builder: (context) {
+                          return const AddToCartBottomSheet();
+                        });
+                  },
+                  title: 'ADD TO CART',
+                  textColor: AppColors.whiteColor,
+                  color: AppColors.blackColor,
+                ),
+              ],
             )
           ],
         ),

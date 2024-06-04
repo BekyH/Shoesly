@@ -218,7 +218,7 @@ class _ShoesDetailsState extends State<ShoesDetails> {
                       useSafeArea: true,
                       backgroundColor: Colors.white,
                       builder: (context) {
-                        return CheckoutBottomSheet();
+                        return CheckoutBottomSheet(shoe: widget.shoe,);
                       });
                 },
               ),

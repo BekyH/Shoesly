@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/widgets/custom_button.dart';
+import 'package:shoesly/features/Discover/data/models/shoe.dart';
 import 'package:shoesly/features/Discover/presentation/screens/cart_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/discover_page.dart';
 
 class AddToCartBottomSheet extends StatelessWidget {
-  const AddToCartBottomSheet({Key? key}) : super(key: key);
+ 
+  const AddToCartBottomSheet({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
