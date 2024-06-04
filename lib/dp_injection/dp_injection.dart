@@ -15,6 +15,7 @@ import 'package:shoesly/features/Discover/domain/usecase/shoreusecase.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/addCartBloc/add_cart_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/brandBloc/brand_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/discover_bloc.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/fetchCartBloc/cart_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/filterBloc/filter_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/reviewsBloc/reviews_bloc.dart';
 
@@ -27,6 +28,7 @@ Future<void> serviceLocatorInit() async {
   sl.registerFactory<ShoeBloc>(() => ShoeBloc(shoeUsecase: sl()));
   sl.registerFactory<ReviewsBloc>(() => ReviewsBloc(reviewsUsecase: sl()));
   sl.registerFactory<AddCartBloc>(() => AddCartBloc(cartUseCase: sl()));
+  sl.registerFactory<CartBloc>(() => CartBloc(cartUseCase: sl()));
 
   // Use cases
   sl.registerLazySingleton<ShoeUsecase>(

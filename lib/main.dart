@@ -6,6 +6,7 @@ import 'package:shoesly/dp_injection/dp_injection.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/addCartBloc/add_cart_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/brandBloc/brand_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/discover_bloc.dart';
+import 'package:shoesly/features/Discover/presentation/bloc/fetchCartBloc/cart_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/filterBloc/filter_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/reviewsBloc/reviews_bloc.dart';
 
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_)=>sl<FilterShoesBloc>()),
           BlocProvider(create: (_)=>sl<ReviewsBloc>()),
            BlocProvider(create: (_)=>sl<AddCartBloc>()),
+           BlocProvider(create: (_)=>sl<CartBloc>()),
     ], 
     child: MaterialApp(
       title: 'Flutter Demo',
