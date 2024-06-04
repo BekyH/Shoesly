@@ -8,6 +8,7 @@ import 'package:shoesly/features/Discover/data/models/cartItem.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/fetchCartBloc/cart_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/fetchCartBloc/cart_event.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/fetchCartBloc/cart_state.dart';
+import 'package:shoesly/features/Discover/presentation/screens/order_summary_page.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/cart_item.dart';
 
 class CartPage extends StatefulWidget {
@@ -26,6 +27,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   double total = 0;
+  List<CartItem> list = [];
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -34,6 +36,7 @@ class _CartPageState extends State<CartPage> {
       appBar: CustomAppBar(
         title: 'Cart',
         isBack: true,
+        centerTitle: true,
         onTap: () {
           Navigator.of(context).pop();
         },
@@ -52,12 +55,13 @@ class _CartPageState extends State<CartPage> {
                   );
                 } else if (state is CartSuccess) {
                   List<CartItem> items = state.carts;
+                  list = items;
                   return Expanded(
                       child: ListView.builder(
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       final item = items[index];
-                     
+
                       return CartItemWidget(
                         item: item,
                       );
@@ -84,13 +88,16 @@ class _CartPageState extends State<CartPage> {
                         Text('Grand Total',
                             style: bodySmallTextStyle.copyWith(
                                 color: AppColors.tabColor)),
-                        Text('$total', style: bodyMediumTextStyle),
+                        Text('\$$total', style: bodyMediumTextStyle),
                       ],
                     ),
                     Spacer(),
                     CustomButton(
                       title: 'CHECK OUT',
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, OrderSummaryPage.routename,arguments: list);
+                      },
                       textColor: AppColors.whiteColor,
                       color: AppColors.blackColor,
                     )

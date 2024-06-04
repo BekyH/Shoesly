@@ -43,6 +43,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
       backgroundColor: AppColors.whiteColor,
       appBar: CustomAppBar(
         title: 'Review',
+        centerTitle: true,
         isBack: true,
         onTap: () {
           Navigator.of(context).pop();
