@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shoesly/core/constants/app_text_styles.dart';
@@ -78,21 +77,21 @@ class _ShoesDetailsState extends State<ShoesDetails> {
             children: [
               CustomShoeWidget(
                 shoeImageUrl: widget.shoe.imageUrl,
-                colorOptions: [Colors.black, Colors.white, Colors.blue],
+                colorOptions: const [Colors.black, Colors.white, Colors.blue],
                 selectedColorIndex: _selectedColorIndex,
                 onColorSelected: _handleColorSelection,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(widget.shoe.shoeName, style: bodyMediumTextStyle),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(Icons.star, color: Colors.yellow),
-                  Icon(Icons.star, color: Colors.yellow),
-                  Icon(Icons.star, color: Colors.yellow),
-                  Icon(Icons.star, color: Colors.yellow),
-                  Icon(Icons.star_half, color: Colors.yellow),
-                  SizedBox(width: 8),
+                  const Icon(Icons.star, color: Colors.yellow),
+                  const Icon(Icons.star, color: Colors.yellow),
+                  const Icon(Icons.star, color: Colors.yellow),
+                  const Icon(Icons.star, color: Colors.yellow),
+                  const Icon(Icons.star_half, color: Colors.yellow),
+                  const SizedBox(width: 8),
                   Text(
                     "${widget.shoe.rating}",
                     style:
@@ -105,9 +104,9 @@ class _ShoesDetailsState extends State<ShoesDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text("Size", style: bodyMediumTextStyle),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               SizedBox(
                 height: screenHeight * 0.04,
                 child: ListView.separated(
@@ -130,7 +129,7 @@ class _ShoesDetailsState extends State<ShoesDetails> {
                     );
                   }),
                   separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(
+                    return const SizedBox(
                       width: 10,
                     );
                   },

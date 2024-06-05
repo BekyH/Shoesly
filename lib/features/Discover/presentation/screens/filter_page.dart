@@ -26,7 +26,6 @@ class _FilterPageState extends State<FilterPage> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
@@ -50,9 +49,9 @@ class _FilterPageState extends State<FilterPage> {
           children: [
             Text('Brands',
                 style: bodyMediumTextStyle.copyWith(fontSize: 16)),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildBrandFilter(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text('Price Range',
                style: bodyMediumTextStyle.copyWith(fontSize: 16)),
             RangeSlider(
@@ -76,22 +75,22 @@ class _FilterPageState extends State<FilterPage> {
                 Text('\$${_currentMaxPrice.toInt()}'),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text('Sort By',
                style: bodyMediumTextStyle.copyWith(fontSize: 16)),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildSortByFilter(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text('Gender',
                 style: bodyMediumTextStyle.copyWith(fontSize: 16)),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildGenderFilter(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text('Color',
                 style: bodyMediumTextStyle.copyWith(fontSize: 16)),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildColorFilter(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             
           ],
         ),
@@ -163,7 +162,7 @@ class _FilterPageState extends State<FilterPage> {
                     child: Icon(brand['icon'] as IconData, color: Colors.black, size: 24),
                   ),
                   if (_selectedBrand == brand['name'])
-                    Positioned(
+                    const Positioned(
                       bottom: 5,
                       right: 5,
                       child: CircleAvatar(
@@ -174,7 +173,7 @@ class _FilterPageState extends State<FilterPage> {
                     ),
                 ],
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(brand['name'] as String, style: TextStyle(fontSize: 12)),
               Text('${brand['items']} Items', style: TextStyle(fontSize: 10, color: Colors.grey)),
             ],

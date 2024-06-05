@@ -140,7 +140,7 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
                       style: bodySmallTextStyle.copyWith(
                           color: AppColors.tabColor),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(total.toString())

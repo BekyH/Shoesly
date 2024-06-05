@@ -18,7 +18,7 @@ class SelectionWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(
@@ -27,7 +27,7 @@ class SelectionWidget extends StatelessWidget {
             )
           ],
         ),
-        Spacer(),
+        const Spacer(),
         IconButton(
           onPressed: () {},
           icon: SvgPicture.asset(Assets.arrowRightsvg),

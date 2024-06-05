@@ -65,7 +65,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                     SizedBox(
                       height: screenHeight * 0.01,
                     ),
-                    SelectionWidget(title: 'Payment', subtitle: 'Credit Card'),
+                    const SelectionWidget(title: 'Payment', subtitle: 'Credit Card'),
                     SizedBox(
                       height: screenHeight * 0.01,
                     ),
@@ -73,7 +73,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                     SizedBox(
                       height: screenHeight * 0.01,
                     ),
-                    SelectionWidget(
+                    const SelectionWidget(
                       title: 'Location',
                       subtitle: 'Addis Ababa, Ethiopia',
                     ),
@@ -114,7 +114,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                     SizedBox(
                       height: screenHeight * 0.01,
                     ),
-                    PaymentTile(title: "Shipping", price: "50"),
+                    const PaymentTile(title: "Shipping", price: "50"),
                     SizedBox(
                       height: screenHeight * 0.01,
                     ),

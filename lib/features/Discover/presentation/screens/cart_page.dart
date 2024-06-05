@@ -50,7 +50,7 @@ class _CartPageState extends State<CartPage> {
             BlocBuilder<CartBloc, CartState>(
               builder: (context, state) {
                 if (state is CartLoading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else if (state is CartSuccess) {
@@ -91,7 +91,7 @@ class _CartPageState extends State<CartPage> {
                         Text('\$$total', style: bodyMediumTextStyle),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     CustomButton(
                       title: 'CHECK OUT',
                       onPressed: () {

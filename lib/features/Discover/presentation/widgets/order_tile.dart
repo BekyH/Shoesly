@@ -16,7 +16,7 @@ class OrderTile extends StatelessWidget {
           cartItem.shoes,
           style: bodyMediumTextStyle,
         ),
-        SizedBox(
+        const SizedBox(
           height: 2,
         ),
         Row(

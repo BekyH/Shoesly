@@ -12,7 +12,7 @@ class PaymentTile extends StatelessWidget {
     return Row(
       children: [
         Text(title,style: bodySmallTextStyle.copyWith(color: AppColors.tabColor),),
-        Spacer(),
+        const Spacer(),
         Text("\$$price")
       ],
     );

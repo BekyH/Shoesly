@@ -45,23 +45,24 @@ class CartItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(item.shoes,
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                SizedBox(height: 4),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 4),
                 Text('${item.brand} . ${item.color} . ${item.size}',
                     style: bodyMediumTextStyle.copyWith(
                         color: AppColors.tabColor)),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Row(
                   children: [
                     Text('\$${item.price}', style: bodyMediumTextStyle),
-                    Spacer(),
-                    IconButton(
+                    const Spacer(),
+                    const IconButton(
                       icon: Icon(Icons.remove_circle_outline),
                       onPressed: null,
                     ),
-                    Text('${item.quantity}', style: TextStyle(fontSize: 16)),
-                    IconButton(
+                    Text('${item.quantity}',
+                        style: const TextStyle(fontSize: 16)),
+                    const IconButton(
                       icon: Icon(Icons.add_circle_outline),
                       onPressed: null,
                     ),
@@ -69,9 +70,6 @@ class CartItemWidget extends StatelessWidget {
                 )
               ],
             ),
-          ),
-          Row(
-            children: [],
           ),
         ],
       ),

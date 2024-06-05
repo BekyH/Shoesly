@@ -47,7 +47,7 @@ class LoadingButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             loadingState == true
-                ? SizedBox(
+                ? const SizedBox(
                     width: 28.5,
                     height: 28.5,
                     child:CircularProgressIndicator(
@@ -59,7 +59,7 @@ class LoadingButton extends StatelessWidget {
                 : const SizedBox(),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.bold),

@@ -17,12 +17,11 @@ class CustomShoeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final screenheight = MediaQuery.of(context).size.height;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Shoe Image
+        
         Container(
           width: 200,
           height: 200,
@@ -49,7 +48,7 @@ class CustomShoeWidget extends StatelessWidget {
                   ),
                 ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         // Image Indicators
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +64,7 @@ class CustomShoeWidget extends StatelessWidget {
             );
           }),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         // Color Options
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

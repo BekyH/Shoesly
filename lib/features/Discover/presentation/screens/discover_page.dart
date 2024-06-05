@@ -5,9 +5,7 @@ import 'package:shoesly/core/constants/app_text_styles.dart';
 import 'package:shoesly/core/constants/assets.dart';
 import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/core/widgets/custom_app_bar.dart';
-import 'package:shoesly/core/widgets/custom_button.dart';
 import 'package:shoesly/core/widgets/custom_icon_button.dart';
-
 import 'package:shoesly/features/Discover/presentation/bloc/brandBloc/brand_bloc.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/brandBloc/brand_event.dart';
 import 'package:shoesly/features/Discover/presentation/bloc/brandBloc/brand_state.dart';
@@ -70,7 +68,7 @@ class _DiscoverPageState extends State<DiscoverPage>
               BlocBuilder<BrandBloc, BrandState>(
                 builder: (context, state) {
                   if (state is BrandLoading) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is BrandLoaded) {
@@ -130,20 +128,20 @@ class _DiscoverPageState extends State<DiscoverPage>
                     return BlocBuilder<FilterShoesBloc, FilterShoesState>(
                       builder: (context, state) {
                         if (state is FilterShoesLoading) {
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
                         } else if (state is FilterShoesLoaded) {
-                          if (state.shoes.length == 0) {
-                            return Center(
+                          if (state.shoes.isEmpty) {
+                            return const Center(
                               child: Text("No Shoeses with this brand"),
                             );
                           }
                           return GridView.builder(
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, // Number of columns
-                              childAspectRatio: 0.8, // Adjust as needed
+                              crossAxisCount: 2, 
+                              childAspectRatio: 0.8, 
                               mainAxisSpacing: 5,
                               crossAxisSpacing: 2,
                             ),

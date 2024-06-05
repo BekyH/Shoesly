@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:shoesly/features/Discover/data/models/cartItem.dart';
-import 'package:shoesly/features/Discover/data/models/review.dart';
 import 'package:shoesly/features/Discover/data/models/shoe.dart';
 import 'package:shoesly/features/Discover/presentation/screens/Reviews_page.dart';
 import 'package:shoesly/features/Discover/presentation/screens/cart_page.dart';

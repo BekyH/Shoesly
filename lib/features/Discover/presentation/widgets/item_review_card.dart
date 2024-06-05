@@ -96,7 +96,7 @@ class ReviewsCard extends StatelessWidget {
                 )
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Text(formatDateTime(DateTime.now()),
                 style: bodySmallTextStyle.copyWith(color: AppColors.tabColor)),
           ])),

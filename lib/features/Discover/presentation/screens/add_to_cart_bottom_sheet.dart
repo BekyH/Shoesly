@@ -6,7 +6,7 @@ import 'package:shoesly/features/Discover/presentation/screens/discover_page.dar
 
 class AddToCartBottomSheet extends StatelessWidget {
   final String quantity;
-   AddToCartBottomSheet({
+   const AddToCartBottomSheet({
     Key? key,
     required this.quantity
   }) : super(key: key);
@@ -14,7 +14,6 @@ class AddToCartBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -26,19 +25,19 @@ class AddToCartBottomSheet extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
+            const Icon(
               Icons.check_circle_outline,
               size: 64,
               color: Colors.black,
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Added to cart',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
-            Text('$quantity Item Total', style: TextStyle(fontSize: 16)),
-            SizedBox(height: 16),
+            const SizedBox(height: 8),
+            Text('$quantity Item Total', style: const TextStyle(fontSize: 16)),
+            const SizedBox(height: 16),
             Row(
               children: [
                 CustomButton(
