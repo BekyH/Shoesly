@@ -123,6 +123,8 @@ class _DiscoverPageState extends State<DiscoverPage>
                     setState(() {
                       _selectedIndex = index;
                     });
+                     final tabs = ["All", ...(context.read<BrandBloc>().state as BrandLoaded).tabs];
+                  context.read<FilterShoesBloc>().add(GetFilteredShoesEvent(tabs[index]));
                   },
                   itemBuilder: (context, index) {
                     return BlocBuilder<FilterShoesBloc, FilterShoesState>(
