@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shoesly/core/constants/app_text_styles.dart';
+import 'package:shoesly/core/theme/colors.dart';
 import 'package:shoesly/features/Discover/data/models/shoe.dart';
 
 class ShoeCard extends StatelessWidget {
@@ -25,6 +26,7 @@ class ShoeCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
+        color: AppColors.tabColor,
           elevation: 4,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02, vertical: screenHeight * 0.01),
