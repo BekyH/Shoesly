@@ -94,7 +94,12 @@ class _ShoesDetailsState extends State<ShoesDetails> {
                   Icon(Icons.star_half, color: Colors.yellow),
                   SizedBox(width: 8),
                   Text(
-                    "${widget.shoe.rating} (${widget.shoe.reviews} Reviews)",
+                    "${widget.shoe.rating}",
+                    style:
+                        bodyMediumTextStyle,
+                  ),
+                  Text(
+                    "(${widget.shoe.reviews} Reviews)",
                     style:
                         bodySmallTextStyle.copyWith(color: AppColors.tabColor),
                   ),
@@ -150,7 +155,7 @@ class _ShoesDetailsState extends State<ShoesDetails> {
                   } else if (state is ReviewsLoaded) {
                     if (state.reviews.isEmpty) {
                       return const Center(
-                        child: Text("No reviews with this rating"),
+                        child: Text("No reviews yet"),
                       );
                     }
                     int len = state.reviews.length;

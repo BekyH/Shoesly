@@ -8,10 +8,29 @@ import 'package:shoesly/features/Discover/presentation/widgets/order_tile.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/payment_tile.dart';
 import 'package:shoesly/features/Discover/presentation/widgets/selection_widget.dart';
 
-class OrderSummaryPage extends StatelessWidget {
+class OrderSummaryPage extends StatefulWidget {
   static const routename = "/orders_summary_page";
   final List<CartItem> items;
   const OrderSummaryPage({Key? key, required this.items}) : super(key: key);
+
+  @override
+  _OrderSummaryPageState createState() => _OrderSummaryPageState();
+}
+
+class _OrderSummaryPageState extends State<OrderSummaryPage> {
+  double total = 0;
+  double caculate(List<CartItem> items) {
+    for (CartItem item in items) {
+      total = total + double.parse(item.price);
+    }
+    return total;
+  }
+
+  @override
+  void initState() {
+    caculate(widget.items);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,14 +91,14 @@ class OrderSummaryPage extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return OrderTile(cartItem: items[index]);
+                        return OrderTile(cartItem: widget.items[index]);
                       },
                       separatorBuilder: (context, index) {
                         return SizedBox(
                           height: screenHeight * 0.015,
                         );
                       },
-                      itemCount: items.length,
+                      itemCount: widget.items.length,
                     ),
                     SizedBox(
                       height: screenHeight * 0.02,
@@ -91,7 +110,7 @@ class OrderSummaryPage extends StatelessWidget {
                     SizedBox(
                       height: screenHeight * 0.01,
                     ),
-                    PaymentTile(title: "Sub Total", price: "705"),
+                    PaymentTile(title: "Sub Total", price: total.toString()),
                     SizedBox(
                       height: screenHeight * 0.01,
                     ),
@@ -99,7 +118,7 @@ class OrderSummaryPage extends StatelessWidget {
                     SizedBox(
                       height: screenHeight * 0.01,
                     ),
-                    PaymentTile(title: "Total Order", price: "734"),
+                    PaymentTile(title: "Total Order", price: (total + 50).toString()),
                   ],
                 ),
               ),
@@ -118,7 +137,8 @@ class OrderSummaryPage extends StatelessWidget {
                   children: [
                     Text(
                       'Grand Total',
-                      style: bodySmallTextStyle.copyWith(color: AppColors.tabColor),
+                      style: bodySmallTextStyle.copyWith(
+                          color: AppColors.tabColor),
                     ),
                     Text(
                       '\$17272',
