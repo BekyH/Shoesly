@@ -25,10 +25,12 @@ class OrderTile extends StatelessWidget {
               cartItem.brand,
               style: bodySmallTextStyle.copyWith(color: AppColors.tabColor),
             ),
+            SizedBox(width: 3,),
             Text(
               cartItem.color,
               style: bodySmallTextStyle.copyWith(color: AppColors.tabColor),
             ),
+              SizedBox(width: 3,),
             Text(
               "Qty ${cartItem.quantity.toString()}",
               style: bodySmallTextStyle.copyWith(color: AppColors.tabColor),
